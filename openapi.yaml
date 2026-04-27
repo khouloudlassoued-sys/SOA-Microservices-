@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: API Personnes
+  description: API RESTful pour gérer un registre de personnes
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /personnes:
+    get:
+      summary: Lister toutes les personnes
+      responses:
+        "200":
+          description: Liste récupérée avec succès
+          content:
+            application/json:
+              example:
+                message: success
+                data:
+                  - id: 1
+                    nom: Bob
+                    adresse: Sfax
+
+    post:
+      summary: Créer une nouvelle personne
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                  example: Koukou
+                adresse:
+                  type: string
+                  example: Sfax, Tunisie
+      responses:
+        "200":
+          description: Personne créée avec succès
+        "400":
+          description: Erreur de données
+
+  /personnes/{id}:
+    get:
+      summary: Récupérer une personne par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: Personne trouvée
+        "400":
+          description: Erreur
+
+    put:
+      summary: Modifier une personne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                  example: Bobby
+                adresse:
+                  type: string
+                  example: Tunis
+      responses:
+        "200":
+          description: Personne mise à jour
+        "400":
+          description: Erreur
+
+    delete:
+      summary: Supprimer une personne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: Personne supprimée
+        "400":
+          description: Erreur
