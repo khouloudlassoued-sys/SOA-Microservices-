@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package hello;
+
+// Définition du service gRPC
+service Greeter {
+  // Méthode RPC : prend un HelloRequest, retourne un HelloReply
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// Message de requête — contient le nom de l'utilisateur
+message HelloRequest {
+  string name = 1;
+}
+
+// Message de réponse — contient le message de salutation
+message HelloReply {
+  string message = 1;
+}
